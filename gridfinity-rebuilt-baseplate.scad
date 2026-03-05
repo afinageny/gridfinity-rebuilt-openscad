@@ -21,9 +21,9 @@ $fs = 0.25;
 
 /* [General Settings] */
 // number of bases along x-axis
-gridx = 1;
+gridx = 3;
 // number of bases along y-axis
-gridy = 1;
+gridy = 2;
 
 /* [Screw Together Settings - Defaults work for M3 and 4-40] */
 // screw diameter

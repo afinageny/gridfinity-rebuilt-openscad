@@ -12,7 +12,10 @@ d_div = 1.2;
 /**
  * @brief Size of a single gridfinity unit. [Length, Width] In millimeters.
  */
-GRID_DIMENSIONS_MM = [42, 42];
+
+GRID_SIZE_MM = 42;
+
+GRID_DIMENSIONS_MM = [GRID_SIZE_MM, GRID_SIZE_MM];
 
 // Tollerance to make sure cuts don't leave a sliver behind,
 // and that items are properly connected to each other.
@@ -187,14 +190,14 @@ _base_profile_max_mm= BASE_PROFILE[3];
 /**
  * @Summary Corner radius of the top of the base.
  */
-BASE_TOP_RADIUS = 7.5 / 2;
+BASE_TOP_RADIUS =  7.5 / 2;
 
 /**
  * @Summary Size of the top of the base. [Length, Width]
  * @Details Each unit's base is 41.5mm x 41.5mm
  *          Leaving 0.5mm gap with an l_grid of 42
  */
-BASE_TOP_DIMENSIONS = [41.5, 41.5];
+BASE_TOP_DIMENSIONS = [GRID_SIZE_MM-0.5, GRID_SIZE_MM-0.5];
 
 /**
  * @Summary How much overhang is expected by the standard per base.
