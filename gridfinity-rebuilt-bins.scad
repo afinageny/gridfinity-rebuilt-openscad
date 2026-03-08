@@ -64,7 +64,7 @@ include_lip = false;
 
 
 /* [Spooncut] */
-spoon_cut = 0;
+spoon_cut = 1;
 spoon_cut_shfit_gridx = 1 ;
 spoon_cut_gridx = 3 ;
 spoon_cut_gridy = 3;
