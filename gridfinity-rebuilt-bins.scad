@@ -32,6 +32,7 @@ use <src/helpers/generic-helpers.scad>
 use <src/helpers/grid.scad>
 use <src/helpers/grid_element.scad>
 use <src/helpers/generic-helpers.scad>
+use <src/helpers/spooncut.scad>
 
 // ===== PARAMETERS ===== //
 
@@ -41,7 +42,7 @@ $fs = 0.25; // .01
 
 /* [General Settings] */
 // number of bases along x-axis
-gridx = 8 ;
+gridx = 5 ;
 // number of bases along y-axis
 gridy = 3;
 // bin height. See bin height information and "gridz_define" below.
@@ -60,11 +61,23 @@ enable_zsnap = false;
 // If the top lip should exist.  Not included in height calculations.
 include_lip = false;
 
+
+
+/* [Spooncut] */
+spoon_cut = 1;
+spoon_cut_shfit_gridx = 0 ;
+spoon_cut_gridx = 3 ;
+spoon_cut_gridy = 3;
+spoon_cut_gridz = 6; //.1
+
+
+
+
 /* [Compartments] */
 // number of X Divisions (set to zero to have solid bin)
 divx = 1;
 // number of Y Divisions (set to zero to have solid bin)
-divy = 1;
+divy = 2;
 // Leave zero for default. Units: mm
 depth = 0;  //.1
 
@@ -126,21 +139,41 @@ echo(str(
 echo("Height breakdown:");
 pprint(bin_get_height_breakdown(bin1));
 
-bin_render(bin1) {
-    bin_subdivide(bin1, [divx, divy]) {
-        depth_real = cgs(height=depth).z;
-        if (cut_cylinders) {
-            cut_chamfered_cylinder(cd/2, depth_real, c_chamfer);
-        } else {
-            cut_compartment_auto(
-                cgs(height=depth),
-                style_tab,
-                place_tab != 0,
-                scoop
-            );
+
+
+
+
+
+
+difference(){
+    bin_render(bin1) {
+        bin_subdivide(bin1, [divx, divy]) {
+            depth_real = cgs(height=depth).z;
+            if (cut_cylinders) {
+                cut_chamfered_cylinder(cd/2, depth_real, c_chamfer);
+            } else {
+                cut_compartment_auto(
+                    cgs(height=depth),
+                    style_tab,
+                    place_tab != 0,
+                    scoop
+                );
+            }
         }
     }
+
+    if(spoon_cut){
+
+        translate([spoon_cut_shfit_gridx*GRID_SIZE_MM,0, BASE_HEIGHT])
+            spooncut([spoon_cut_gridx*GRID_SIZE_MM, spoon_cut_gridy*GRID_SIZE_MM, BASE_HEIGHT*(spoon_cut_gridz-1)], GRID_SIZE_MM/4 );
+
+    }
+
+
+
 }
+
+
 
 // ===== EXAMPLES ===== //
 /*

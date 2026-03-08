@@ -22,6 +22,7 @@ use <../helpers/generic-helpers.scad>
 use <../helpers/list.scad>
 use <../helpers/shapes.scad>
 
+
 /*
  * @brief Initialize A Gridfinity Bin
  * @details Creates the top portion of a bin, and sets some gloal variables.
